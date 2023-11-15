@@ -19,12 +19,12 @@ import ui.InputField
 import ui.ScreenHeader
 import utils.PasswordValidator
 import utils.Screen
-import utils.trackViewScreen
+import utils.trackViewSignupScreen
 
 @Composable
 fun SignupScreen(navigator: MutableState<String>) {
     LaunchedEffect(Unit) {
-        trackViewScreen()
+        trackViewSignupScreen()
     }
 
     // Props
