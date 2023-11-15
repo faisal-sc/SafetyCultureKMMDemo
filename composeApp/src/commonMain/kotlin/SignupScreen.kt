@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ui.InputField
+import ui.ScreenHeader
 import utils.PasswordValidator
 import utils.trackViewScreen
 
@@ -39,27 +40,10 @@ fun SignupScreen() {
         modifier = Modifier.padding(all = 16.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp),
     ) {
-        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text(
-                text = "Create your account",
-                style = TextStyle(
-                    fontSize = 28.sp,
-                    lineHeight = 36.sp,
-                    fontWeight = FontWeight(700),
-                    color = Color(0xFF081833),
-
-                    )
-            )
-            Text(
-                text = "Your free SafetyCulture account includes up to 10 team members, unlimited inspections, issues and more.",
-                style = TextStyle(
-                    fontSize = 14.sp,
-                    lineHeight = 20.sp,
-                    fontWeight = FontWeight(400),
-                    color = Color(0xFF5E6C84),
-                )
-            )
-        }
+        ScreenHeader(
+            heading = "Create your account",
+            subheading = "Your free SafetyCulture account includes up to 10 team members, unlimited inspections, issues and more.",
+        )
         // Email
         InputField.Default(
             label = "Email",

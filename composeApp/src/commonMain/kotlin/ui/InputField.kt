@@ -43,7 +43,7 @@ object InputField {
         onValueChange: (String) -> Unit,
         isError: Boolean,
     ) = Column {
-        OutlinedTextFieldBackground(Color.White) {
+        OutlinedTextFieldBackground(color = Color.White) {
             OutlinedTextField(
                 label = { Text(text) },
                 value = value,
