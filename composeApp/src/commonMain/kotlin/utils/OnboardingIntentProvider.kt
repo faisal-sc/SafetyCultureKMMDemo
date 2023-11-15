@@ -13,7 +13,7 @@ object OnboardingIntentProvider {
             text = "Digitize & improve workplace efficiency"
         ),
         OnboardingIntent(
-            isSelected = true,
+            isSelected = false,
             icon = "ic_quality.xml",
             text = "Ensure quality standards are met"
         ),

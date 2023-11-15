@@ -1,11 +1,20 @@
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import ui.SCTopBar
+import utils.Screen
 
 @Composable
 fun App() {
+    // Init Navigation
+    var navigator = mutableStateOf("")
+    LaunchedEffect(Unit) {
+        navigator.value = Screen.Signup.name
+    }
+    // UI
     MaterialTheme {
         Scaffold(
             topBar = {
@@ -13,30 +22,10 @@ fun App() {
             },
             backgroundColor = Color(0xFFE9EEF6),
         ) {
-//            SignupScreen()
-            OnboardingIntentScreen()
+            when (navigator.value) {
+                Screen.OnboardingIntent.name -> OnboardingIntentScreen()
+                else -> SignupScreen(navigator)
+            }
         }
     }
 }
-
-//@Composable
-//fun ComposeNavigation() {
-//
-//    val navController = rememberNavController()
-//
-//    NavHost(navController = navController, startDestination = "First"){
-//        composable("First"){
-//            FirstScreen()
-//        }
-//        composable("Second"){
-//            SecondScreen()
-//        }
-//    }
-//
-//}
-//
-//
-//// Pass above function in the MainActivity's setContent function :)
-//setContent{
-//    ComposeNavigation()
-//}
