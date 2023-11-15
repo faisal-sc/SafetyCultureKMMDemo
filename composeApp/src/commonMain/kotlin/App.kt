@@ -13,8 +13,8 @@ fun App() {
             },
             backgroundColor = Color(0xFFE9EEF6),
         ) {
-            SignupScreen()
-//            OnboardingIntentScreen()
+//            SignupScreen()
+            OnboardingIntentScreen()
         }
     }
 }

@@ -1,4 +1,3 @@
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -8,17 +7,22 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import ui.RowOnboardingIntent
 import ui.ScreenHeader
+import utils.OnboardingIntent
 import utils.OnboardingIntentProvider
-import utils.PasswordValidator
 
 @Composable
 fun OnboardingIntentScreen() {
-    val items = OnboardingIntentProvider.onboardingIntents
+    val onboardingIntents = remember { mutableStateListOf<OnboardingIntent>() }
+    LaunchedEffect(Unit) {
+        onboardingIntents.addAll(OnboardingIntentProvider.onboardingIntents)
+    }
 
     // List
     Column(
@@ -26,14 +30,19 @@ fun OnboardingIntentScreen() {
         verticalArrangement = Arrangement.spacedBy(24.dp),
     ) {
         ScreenHeader(
-            heading = "What is your main purpose for using SafetyCulture?",
+            heading = "What's your purpose for using SafetyCulture?",
             subheading = "We’ll use this to help get you started.",
         )
-        Column(
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            items.forEach {
-                RowOnboardingIntent(data = it)
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            onboardingIntents.forEachIndexed { index, onboardingIntent ->
+                RowOnboardingIntent(
+                    data = onboardingIntent,
+                    onClick = { clickedItem ->
+                        onboardingIntents[index] = clickedItem.copy(
+                            isSelected = !clickedItem.isSelected
+                        )
+                    }
+                )
             }
         }
         Button(

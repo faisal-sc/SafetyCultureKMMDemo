@@ -2,6 +2,8 @@ package ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,20 +23,31 @@ import utils.OnboardingIntent
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-fun RowOnboardingIntent(data: OnboardingIntent) {
+fun RowOnboardingIntent(
+    data: OnboardingIntent,
+    onClick: (OnboardingIntent) -> Unit
+) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.Start),
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth().height(64.dp)
+        modifier = Modifier.fillMaxWidth()
+            .height(64.dp)
             .clip(shape = RoundedCornerShape(12.dp))
-            .background(color = Color.White),
+            .background(color = Color.White)
+            .border(
+                width = if (data.isSelected) 1.dp else 0.dp,
+                color = if (data.isSelected) Color(0xFF564BE7) else Color.Transparent,
+                shape = RoundedCornerShape(12.dp)
+            )
+            .clickable {
+                onClick.invoke(data)
+            }
     ) {
         Image(
             painter = painterResource(data.icon),
             contentDescription = data.text,
-            modifier = Modifier.width(56.dp),
-
-            )
+            modifier = Modifier.width(56.dp)
+        )
         Text(text = data.text)
     }
 }
